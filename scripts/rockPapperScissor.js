@@ -76,7 +76,9 @@ function playGame(){
             uScore++;
         }else if (rwin === "comp"){
             cScore++;
-        }else{;}
+        }else{
+            i--;
+            }
     }
     if (uScore > cScore){
         console.log(`You Won the game by ${uScore} to ${cScore} `);
