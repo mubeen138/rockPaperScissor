@@ -24,35 +24,41 @@ function playerSelection(){
         
 }
 
-function playGame(computerSelection,playerSelection){
+function playRound(computerSelection,playerSelection){
     const compSel = computerSelection().toLowerCase();
     const playerSel = playerSelection().toLowerCase();
 
     if (compSel === playerSel){
         console.log(`Oops! Both chose ${compSel}`)
-        playGame(computerSelection,playerSelection);
+        playRound(computerSelection,playerSelection);
     }else {
         console.log(`Computer chose ${compSel}`);
         switch (compSel){
             case "scissors":
                 if ( playerSel === "rock" ){
                     console.log("You Win! Rock beats Scissors");
+                    return("user");
                 }else {
                     console.log("You Lose! Scissors beat Paper");
+                    return("comp");
                 }
                 break;
             case "rock":
                 if ( playerSel === "scissors" ){
                     console.log("You Lose! Rock beats Scissors");
+                    return("comp");
                 }else {
                     console.log("You Win! Paper beats Rock");
+                    return("user");
                 }
                 break;
             case "paper":
                 if ( playerSel === "scissors" ){
                     console.log("You Win! Scissors beat Paper");
+                    return("user");
                 }else {
                     console.log("You Lose! Paper beat Rock");
+                    return("comp");
                 }
                 break;
         }
@@ -60,4 +66,22 @@ function playGame(computerSelection,playerSelection){
     }
 
 }
-playGame(computerSelection,playerSelection);
+function playGame(){
+    let uScore = 0;
+    let cScore = 0;
+    let rwin;
+    for (let i = 0; i < 5 ; i++){
+        rwin = playRound(computerSelection,playerSelection);
+        if (rwin === "user"){
+            uScore++;
+        }else if (rwin === "comp"){
+            cScore++;
+        }else{;}
+    }
+    if (uScore > cScore){
+        console.log(`You Won the game by ${uScore} to ${cScore} `);
+    }else{
+        console.log(`Computer Won the game by ${cScore} to ${uScore} `);
+    }
+}
+playGame();
