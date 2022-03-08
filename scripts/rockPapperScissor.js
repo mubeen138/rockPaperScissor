@@ -15,7 +15,7 @@ function computerSelection(){
 function playerSelection(){
     let pSelect;
     pSelect = prompt("Enter one of Rock Paper Scissors:");
-    if (pSelect.toLowerCase() === "rock" || pSelect.toLowerCase() === "scissors" || pSelect.toLowerCase() === "paper")
+    if (pSelect != null || pSelect.toLowerCase() === "rock" || pSelect.toLowerCase() === "scissors" || pSelect.toLowerCase() === "paper")
     {
         return pSelect;
     }else{
@@ -29,7 +29,8 @@ function playRound(computerSelection,playerSelection){
     const playerSel = playerSelection().toLowerCase();
 
     if (compSel === playerSel){
-        console.log(`Oops! Both chose ${compSel}`)
+        console.log(`Oops! Both chose ${compSel}`);
+        return ("same");
         playRound(computerSelection,playerSelection);
     }else {
         console.log(`Computer chose ${compSel}`);
