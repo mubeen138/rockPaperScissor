@@ -157,10 +157,12 @@ function announceWinner(userScr,compScr){
     gameWinnerP.classList.add('winner');
     if (userScr > compScr){
         btnWrapper.removeChild(choiceButtons);
+        body.removeChild(resultDiv);
         gameWinnerP.textContent = `You have WON the game! by ${userScr}-${compScr}`;
         btnWrapper.appendChild(gameWinnerP);
     }else if (compScr > userScr){
         btnWrapper.removeChild(choiceButtons);
+        body.removeChild(resultDiv);
         gameWinnerP.textContent = `Computer have WON the game! by ${compScr}-${userScr}`
         btnWrapper.appendChild(gameWinnerP);
     }
