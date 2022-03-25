@@ -39,8 +39,8 @@ function playerSelection(eventOccur){
 function playRound(theEvent){
     const compSel = computerSelection().toLowerCase();
     const playerSel = playerSelection(theEvent).toLowerCase();
-    computerChoiceSpan.textContent = `${compSel}`;
-    playerChoiceSpan.textContent = `${playerSel}`;
+    computerChoiceSpan.textContent = `${capitalFirstAlpabet(compSel)}`;
+    playerChoiceSpan.textContent = `${capitalFirstAlpabet(playerSel)}`;
 
     if (compSel === playerSel){
         winnerP.textContent = `Oops! Both chose ${compSel}`;
@@ -79,7 +79,7 @@ function playRound(theEvent){
 
     }
 }
-function createBtnText(someId){
+function capitalFirstAlpabet(someId){
     let output = Array.from(someId);
     output[0] = someId[0].toUpperCase();
     output = output.join('');
@@ -101,7 +101,7 @@ function playGame(){
     playerChoiceSpan.classList.add('choice');
     //create p to display computers choice;
      computerChoiceP = document.createElement('p');
-    playerChoiceP.id = "computerChoice";
+     computerChoiceP.id = "computerChoice";
     computerChoiceP.classList.add('resultsP');
     computerChoiceP.textContent = "Computer Chose: \t";
      computerChoiceSpan = document.createElement('span');
@@ -112,6 +112,7 @@ function playGame(){
     //Update score
     liveResult = document.createElement('p');
     liveResult.classList.add('resultsP');
+    liveResult.id='liveResult';
     //completed the node tree
     playerChoiceP.appendChild(playerChoiceSpan);
     computerChoiceP.appendChild(computerChoiceSpan);
@@ -130,7 +131,7 @@ function playGame(){
     for (id of idArr){
         btn = document.createElement('button');
         btn.id = id;
-        btnText = createBtnText(id);
+        btnText = capitalFirstAlpabet(id);
         btn.textContent =btnText;
         btn.addEventListener('click',playRound);
         choiceButtons.appendChild(btn);
@@ -156,15 +157,30 @@ function announceWinner(userScr,compScr){
     let gameWinnerP = document.createElement('p');
     gameWinnerP.classList.add('winner');
     if (userScr > compScr){
-        btnWrapper.removeChild(choiceButtons);
-        body.removeChild(resultDiv);
+        body.removeChild(btnWrapper);
+       // btnWrapper.removeChild(choiceButtons);
+
+        resultDiv.removeChild(playerChoiceP);
+        resultDiv.removeChild(computerChoiceP);
+        resultDiv.removeChild(winnerP);
+        resultDiv.removeChild(liveResult);
+
         gameWinnerP.textContent = `You have WON the game! by ${userScr}-${compScr}`;
-        btnWrapper.appendChild(gameWinnerP);
+        resultDiv.appendChild(gameWinnerP);
+        
     }else if (compScr > userScr){
-        btnWrapper.removeChild(choiceButtons);
-        body.removeChild(resultDiv);
+
+        body.removeChild(btnWrapper);
+       // btnWrapper.removeChild(choiceButtons);
+
+        resultDiv.removeChild(playerChoiceP);
+        resultDiv.removeChild(computerChoiceP);
+        resultDiv.removeChild(winnerP);
+        resultDiv.removeChild(liveResult);
+
         gameWinnerP.textContent = `Computer have WON the game! by ${compScr}-${userScr}`
-        btnWrapper.appendChild(gameWinnerP);
+        resultDiv.appendChild(gameWinnerP);
+
     }
 }
 
