@@ -11,6 +11,10 @@ let computerChoiceSpan ;
 let winnerP;
 let body;
 let liveResult;
+let btnWrapper = document.querySelector(".button-wrapper");
+let choiceButtons = document.createElement('div');
+let h2Heading = document.createElement('h2');
+h2Heading.textContent='Make Your Choice';
 
 function computerSelection(){
     let randNum;
@@ -121,7 +125,7 @@ function playGame(){
     resultDiv.appendChild(winnerP);
     resultDiv.appendChild(liveResult);
     //appended the results
-     body = document.querySelector("body");
+    body = document.querySelector("body");
     body.appendChild(resultDiv);
     choiceButtons.classList.add('choiceButtons');
     //create button elements for player to chose.
@@ -136,8 +140,10 @@ function playGame(){
         btn.addEventListener('click',playRound);
         choiceButtons.appendChild(btn);
     }
-    btnWrapper.appendChild(choiceButtons);
     btnWrapper.removeChild(playButton);
+    btnWrapper.appendChild(h2Heading);
+    btnWrapper.appendChild(choiceButtons);
+    
 }
 
 function updateGameScore(rwin){
@@ -155,6 +161,13 @@ function updateGameScore(rwin){
 
 function announceWinner(userScr,compScr){
     let gameWinnerP = document.createElement('p');
+
+    // Adding button at the end of game ot reload page
+    let replayBtn = document.createElement('button');
+    replayBtn.textContent='Play Again';
+    replayBtn.id = 'replayButton';
+    replayBtn.addEventListener('click',() => location.reload());
+
     gameWinnerP.classList.add('winner');
     if (userScr > compScr){
         body.removeChild(btnWrapper);
@@ -182,10 +195,9 @@ function announceWinner(userScr,compScr){
         resultDiv.appendChild(gameWinnerP);
 
     }
+    gameWinnerP.appendChild(replayBtn);
 }
 
-let btnWrapper = document.querySelector(".button-wrapper");
-let choiceButtons = document.createElement('div');
 
 let playButton = document.querySelector('#play');
 playButton.addEventListener('click',playGame);
